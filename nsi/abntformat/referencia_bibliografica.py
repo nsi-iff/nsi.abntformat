@@ -45,7 +45,8 @@ class ReferenciaBibliografica:
         referencia += artigo_anais_evento.local_publicacao + ': '
         referencia += artigo_anais_evento.editora + ', '
         referencia += artigo_anais_evento.ano_publicacao + '. '
-        referencia += 'P. ' + artigo_anais_evento.pagina_inicial + '-' + artigo_anais_evento.pagina_final + '.'
+        referencia += 'P. ' + artigo_anais_evento.pagina_inicial + '-' + \
+            artigo_anais_evento.pagina_final + '.'
         return referencia
 
     def _referencia_artigo_periodico(self, artigo_periodico):
@@ -59,7 +60,8 @@ class ReferenciaBibliografica:
         referencia += artigo_periodico.local_publicacao + ', '
         referencia += 'v. ' + artigo_periodico.volume + ', '
         referencia += 'n. ' + artigo_periodico.fasciculo + ', '
-        referencia += 'p. ' + artigo_periodico.pagina_inicial + '-' + artigo_periodico.pagina_final + ', '
+        referencia += 'p. ' + artigo_periodico.pagina_inicial + '-' + \
+            artigo_periodico.pagina_final + ', '
         referencia += artigo_periodico.data_publicacao + '.'
         return referencia
 
