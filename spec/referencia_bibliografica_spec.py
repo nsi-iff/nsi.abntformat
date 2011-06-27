@@ -3,7 +3,7 @@
 from ludibrio import Stub
 import unittest
 from should_dsl import should
-from referencia_bibliografica import ReferenciaBibliografica
+from nsi.abntformat import ReferenciaBibliografica
 
 
 class ReferenciaBibliograficaSpec(unittest.TestCase):
