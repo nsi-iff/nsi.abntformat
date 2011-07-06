@@ -28,7 +28,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             trabalho_conclusao.instituicao >> 'Instituto de Psicologia, '\
                                               'Universidade de São Paulo'
             trabalho_conclusao.local_defesa >> 'São Paulo'
-        referencia_abnt = referencia.gera_referencia(trabalho_conclusao)
+        referencia_abnt = referencia.gerar(trabalho_conclusao)
         referencia_abnt |should| equal_to(
             'FANTUCCI, I. Contribuição do alerta, da atenção, da intenção e da'
             ' expectativa temporal para o desempenho de humanos em tarefas de '
@@ -53,7 +53,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             artigo_anais_evento.ano_publicacao >> '1998'
             artigo_anais_evento.pagina_inicial >> '15'
             artigo_anais_evento.pagina_final >> '30'
-        referencia_abnt = referencia.gera_referencia(artigo_anais_evento)
+        referencia_abnt = referencia.gerar(artigo_anais_evento)
         referencia_abnt |should| equal_to(
             'MOREIRA, A. F. B. Multiculturalismo, Currículo e Formação de '
             'Professores. In: SEMINÁRIO DE EDUCAÇÃO BÁSICA, 2., 1998, Santa '
@@ -74,7 +74,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             artigo_periodico.pagina_inicial >> '35'
             artigo_periodico.pagina_final >> '58'
             artigo_periodico.data_publicacao >> '1979'
-        referencia_abnt = referencia.gera_referencia(artigo_periodico)
+        referencia_abnt = referencia.gerar(artigo_periodico)
         referencia_abnt |should| equal_to(
             'SAVIANI, D. A Universidade e a Problemática da Educação e Cultura.'\
             ' Educação Brasileira, Brasília, v. 1, n. 3, p. 35-58, 1979.')
@@ -88,7 +88,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             periodico_tecnico_cientifico.editora >> 'UFRGS/FACED'
             periodico_tecnico_cientifico.ano_primeiro_volume >> '1975'
             periodico_tecnico_cientifico.ano_ultimo_volume >> None
-        referencia_abnt = referencia.gera_referencia(periodico_tecnico_cientifico)
+        referencia_abnt = referencia.gerar(periodico_tecnico_cientifico)
         referencia_abnt |should| equal_to('EDUCAÇÃO & REALIDADE. Porto Alegre:'\
                                           ' UFRGS/FACED, 1975-')
 
@@ -107,7 +107,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             livro.editora >> 'Iglu'
             livro.ano_publicacao >> '2001'
             livro.numero_paginas >> '386'
-        referencia_abnt = referencia.gera_referencia(livro)
+        referencia_abnt = referencia.gerar(livro)
         referencia_abnt |should| equal_to('AZEVEDO, M. A.; GUERRA, V. N. A. '
             'Mania de bater: a punição corporal doméstica de crianças e '
             'adolescentes no Brasil. São Paulo: Iglu, 2001. 386 p.')
@@ -124,7 +124,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             relatorio_tecnico_cientifico.instituicao >> 'EPUSP'
             relatorio_tecnico_cientifico.ano_publicacao >> '1991'
             relatorio_tecnico_cientifico.numero_paginas >> '38'
-        referencia_abnt = referencia.gera_referencia(relatorio_tecnico_cientifico)
+        referencia_abnt = referencia.gerar(relatorio_tecnico_cientifico)
         referencia_abnt |should| equal_to(
             'SOUZA, U. E.; MELHADO, S. B. Subsídios para a avaliação do '
             'custo de mão-de-obra na construção civil. São Paulo: EPUSP, 1991. '

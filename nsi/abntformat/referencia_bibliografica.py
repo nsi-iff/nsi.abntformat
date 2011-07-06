@@ -92,7 +92,7 @@ class ReferenciaBibliografica:
             'ano': relatorio_tecnico_cientifico.ano_publicacao,
             'paginas': relatorio_tecnico_cientifico.numero_paginas }
 
-    def gera_referencia(self, documento):
+    def gerar(self, documento):
         conversores = {
             'trabalho de conclusão': self._referencia_trabalho_conclusao,
             'artigo de anais de eventos': self._referencia_artigo_anais_evento,
