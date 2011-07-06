@@ -1,8 +1,6 @@
 #coding:utf-8
 
 class ReferenciaBibliografica:
-    def __init__(self):
-        pass
 
     def _monta_nome(self, autores):
         lista_autores = autores.split(';')
