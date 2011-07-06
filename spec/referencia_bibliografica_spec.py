@@ -8,12 +8,12 @@ from nsi.abntformat import ReferenciaBibliografica
 
 class ReferenciaBibliograficaSpec(unittest.TestCase):
 
-    def teste_monta_nome(self):
-        montar_nome = ReferenciaBibliografica()
-        montar_nome._monta_nome('Ruhan Ferreira Almeida; Carlos Souza Teste') \
+    def test_converte_nome_completo_em_citacao(self):
+        referencia = ReferenciaBibliografica()
+        referencia._monta_nome('Ruhan Ferreira Almeida; Carlos Souza Teste') \
             |should| equal_to ('ALMEIDA, R. F.; TESTE, C. S.')
 
-    def testa_referencia_de_trabalho_conclusao(self):
+    def test_gera_referencia_para_trabalho_de_conclusao(self):
         referencia = ReferenciaBibliografica()
         with Stub() as trabalho_conclusao:
             trabalho_conclusao.tipo >> 'trabalho de conclusão'
@@ -35,7 +35,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             'tempo de reação. 2001. 130 f. Tese (Doutorado em Psicologia) - '
             'Instituto de Psicologia, Universidade de São Paulo, São Paulo.')
 
-    def testa_referencia_de_artigo_anais_evento(self):
+    def test_gera_referencia_de_artigo_de_anais_de_evento(self):
         referencia = ReferenciaBibliografica()
         with Stub() as artigo_anais_evento:
             artigo_anais_evento.tipo >> 'artigo de anais de eventos'
@@ -59,7 +59,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             'Professores. In: SEMINÁRIO DE EDUCAÇÃO BÁSICA, 2., 1998, Santa '
             'Cruz do Sul. Anais. Santa Cruz do Sul: EDUNISC, 1998. P. 15-30.')
 
-    def testa_referencia_de_artigo_periodico(self):
+    def test_gera_referencia_de_artigo_de_periodico(self):
         referencia = ReferenciaBibliografica()
         with Stub() as artigo_periodico:
             artigo_periodico.tipo >> 'artigo de periodico'
@@ -79,7 +79,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             'SAVIANI, D. A Universidade e a Problemática da Educação e Cultura.'\
             ' Educação Brasileira, Brasília, v. 1, n. 3, p. 35-58, 1979.')
 
-    def testa_referencia_de_periodico_tecnico_cientifico(self):
+    def test_gera_referencia_de_periodico_tecnico_cientifico(self):
         referencia = ReferenciaBibliografica()
         with Stub() as periodico_tecnico_cientifico:
             periodico_tecnico_cientifico.tipo >> 'periodico tecnico cientifico'
@@ -92,7 +92,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
         referencia_abnt |should| equal_to('EDUCAÇÃO & REALIDADE. Porto Alegre:'\
                                           ' UFRGS/FACED, 1975-')
 
-    def testa_referencia_de_livro(self):
+    def test_gera_referencia_de_livro(self):
         referencia = ReferenciaBibliografica()
         with Stub() as livro:
             livro.tipo >> 'livro'
@@ -112,7 +112,7 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             'Mania de bater: a punição corporal doméstica de crianças e '
             'adolescentes no Brasil. São Paulo: Iglu, 2001. 386 p.')
 
-    def testa_referencia_de_relatorio_tecnico_cientifico(self):
+    def test_gera_referencia_de_relatorio_tecnico_cientifico(self):
         referencia = ReferenciaBibliografica()
         with Stub() as relatorio_tecnico_cientifico:
             relatorio_tecnico_cientifico.tipo >> 'relatorio tecnico cientifico'
