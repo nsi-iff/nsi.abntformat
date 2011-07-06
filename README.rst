@@ -13,3 +13,9 @@ Com suporte a:
 - livro
 - relatório técnico científico
 
+Como instalar
+~~~~~~~~~~~~~
+
+Ainda não está disponível um pacote no pypi, mas é possível instalar direto do GitHub::
+
+    $ pip install https://github.com/nsi-iff/nsi.abntformat/tarball/master
