@@ -17,88 +17,82 @@ class ReferenciaBibliografica:
         return "; ".join(lista_autores)
 
     def _referencia_trabalho_conclusao(self, trabalho_conclusao):
-        referencia = self._monta_nome(trabalho_conclusao.autores)
-        referencia += ' ' + trabalho_conclusao.titulo
-        if trabalho_conclusao.subtitulo != None:
-            referencia += ': '
-            referencia += trabalho_conclusao.subtitulo
-        referencia += '. '
-        referencia += trabalho_conclusao.data_defesa + '. '
-        referencia += trabalho_conclusao.total_folhas + ' f. '
-        referencia += trabalho_conclusao.tipo_trabalho + ' - '
-        referencia += trabalho_conclusao.instituicao + ', '
-        referencia += trabalho_conclusao.local_defesa + '.'
-        return referencia
+        return '%(autores)s %(titulo)s%(subtitulo)s. %(defesa)s. '\
+                '%(folhas)s f. %(tipo)s - %(instituicao)s, %(local)s.' % {
+            'autores': self._monta_nome(trabalho_conclusao.autores),
+            'titulo': trabalho_conclusao.titulo,
+            'subtitulo': self._gerar_subtitulo(trabalho_conclusao),
+            'defesa': trabalho_conclusao.data_defesa,
+            'folhas': trabalho_conclusao.total_folhas,
+            'tipo': trabalho_conclusao.tipo_trabalho,
+            'instituicao': trabalho_conclusao.instituicao,
+            'local': trabalho_conclusao.local_defesa }
 
     def _referencia_artigo_anais_evento(self, artigo_anais_evento):
-        referencia = self._monta_nome(artigo_anais_evento.autores)
-        referencia += ' ' + artigo_anais_evento.titulo
-        if artigo_anais_evento.subtitulo != None:
-            referencia += ': '
-            referencia += artigo_anais_evento.subtitulo
-        referencia += '. In: '
-        referencia += artigo_anais_evento.nome_evento + ', '
-        referencia += artigo_anais_evento.numero_evento + '., '
-        referencia += artigo_anais_evento.ano_evento + ', '
-        referencia += artigo_anais_evento.local_evento + '. '
-        referencia += artigo_anais_evento.titulo_anais + '. '
-        referencia += artigo_anais_evento.local_publicacao + ': '
-        referencia += artigo_anais_evento.editora + ', '
-        referencia += artigo_anais_evento.ano_publicacao + '. '
-        referencia += 'P. ' + artigo_anais_evento.pagina_inicial + '-' + \
-            artigo_anais_evento.pagina_final + '.'
-        return referencia
+        return '%(autores)s %(titulo)s%(subtitulo)s. In: %(nome_evento)s, ' \
+                '%(numero_evento)s., %(ano_evento)s, %(local_evento)s. ' \
+                '%(titulo_anais)s. %(local_publicacao)s: %(editora)s, ' \
+                '%(ano_publicacao)s. P. %(pagina_inicial)s-%(pagina_final)s.' % {
+            'autores': self._monta_nome(artigo_anais_evento.autores),
+            'titulo': artigo_anais_evento.titulo,
+            'subtitulo': self._gerar_subtitulo(artigo_anais_evento),
+            'nome_evento': artigo_anais_evento.nome_evento,
+            'numero_evento': artigo_anais_evento.numero_evento,
+            'ano_evento': artigo_anais_evento.ano_evento,
+            'local_evento': artigo_anais_evento.local_evento,
+            'titulo_anais': artigo_anais_evento.titulo_anais,
+            'local_publicacao': artigo_anais_evento.local_publicacao,
+            'editora': artigo_anais_evento.editora,
+            'ano_publicacao': artigo_anais_evento.ano_publicacao,
+            'pagina_inicial': artigo_anais_evento.pagina_inicial,
+            'pagina_final': artigo_anais_evento.pagina_final }
 
     def _referencia_artigo_periodico(self, artigo_periodico):
-        referencia = self._monta_nome(artigo_periodico.autores)
-        referencia += ' ' + artigo_periodico.titulo
-        if artigo_periodico.subtitulo != None:
-            referencia += ': '
-            referencia += artigo_periodico.subtitulo
-        referencia += '. '
-        referencia += artigo_periodico.nome_periodico + ', '
-        referencia += artigo_periodico.local_publicacao + ', '
-        referencia += 'v. ' + artigo_periodico.volume + ', '
-        referencia += 'n. ' + artigo_periodico.fasciculo + ', '
-        referencia += 'p. ' + artigo_periodico.pagina_inicial + '-' + \
-            artigo_periodico.pagina_final + ', '
-        referencia += artigo_periodico.data_publicacao + '.'
-        return referencia
+        return '%(autores)s %(titulo)s%(subtitulo)s. %(nome)s, %(local)s, ' \
+                'v. %(volume)s, n. %(fasciculo)s, ' \
+                'p. %(pagina_inicial)s-%(pagina_final)s, %(data)s.' % {
+            'autores': self._monta_nome(artigo_periodico.autores),
+            'titulo': artigo_periodico.titulo,
+            'subtitulo': self._gerar_subtitulo(artigo_periodico),
+            'nome': artigo_periodico.nome_periodico,
+            'local': artigo_periodico.local_publicacao,
+            'volume': artigo_periodico.volume,
+            'fasciculo': artigo_periodico.fasciculo,
+            'pagina_inicial': artigo_periodico.pagina_inicial,
+            'pagina_final': artigo_periodico.pagina_final,
+            'data': artigo_periodico.data_publicacao }
 
     def _referencia_periodico_tecnico_cientifico(self, periodico_tecnico_cientifico):
-        referencia = periodico_tecnico_cientifico.titulo + '. '
-        referencia += periodico_tecnico_cientifico.local_publicacao + ': '
-        referencia += periodico_tecnico_cientifico.editora + ', '
-        referencia += periodico_tecnico_cientifico.ano_primeiro_volume + '-'
-        if periodico_tecnico_cientifico.ano_ultimo_volume != None:
-            referencia += periodico_tecnico_cientifico.ano_ultimo_volume + '.'
-        return referencia
+        return '%(titulo)s. %(local)s: %(editora)s, ' \
+                '%(ano_primeiro)s-%(ano_ultimo)s' % {
+            'titulo': periodico_tecnico_cientifico.titulo,
+            'local': periodico_tecnico_cientifico.local_publicacao,
+            'editora': periodico_tecnico_cientifico.editora,
+            'ano_primeiro': periodico_tecnico_cientifico.ano_primeiro_volume,
+            'ano_ultimo': periodico_tecnico_cientifico.ano_ultimo_volume or '' }
 
     def _referencia_livro(self, livro):
-        referencia = self._monta_nome(livro.autores)
-        referencia += ' ' + livro.titulo
-        if livro.subtitulo != None:
-            referencia += ': '
-            referencia += livro.subtitulo
-        referencia += '. '
-        if livro.traducao != None:
-            referencia += livro.traducao + '. '
-        if livro.edicao != None:
-            referencia += livro.edicao + '. '
-        referencia += livro.local_publicacao + ': '
-        referencia += livro.editora + ', '
-        referencia += livro.ano_publicacao + '. '
-        referencia += livro.numero_paginas + ' p.'
-        return referencia
+        return '%(autores)s %(titulo)s%(subtitulo)s. %(traducao)s%(edicao)s' \
+                '%(publicacao)s: %(editora)s, %(ano)s. %(paginas)s p.' % {
+            'autores': self._monta_nome(livro.autores),
+            'titulo': livro.titulo,
+            'subtitulo': self._gerar_subtitulo(livro),
+            'traducao': self._gerar_opcional(livro.traducao, '%s. '),
+            'edicao': self._gerar_opcional(livro.edicao, '%s. '),
+            'publicacao': livro.local_publicacao,
+            'editora': livro.editora,
+            'ano': livro.ano_publicacao,
+            'paginas': livro.numero_paginas }
 
     def _referencia_relatorio_tecnico_cientifico(self, relatorio_tecnico_cientifico):
-        referencia = self._monta_nome(relatorio_tecnico_cientifico.autores)
-        referencia += ' ' + relatorio_tecnico_cientifico.titulo + '. '
-        referencia += relatorio_tecnico_cientifico.local_publicacao + ': '
-        referencia += relatorio_tecnico_cientifico.instituicao + ', '
-        referencia += relatorio_tecnico_cientifico.ano_publicacao + '. '
-        referencia += relatorio_tecnico_cientifico.numero_paginas + ' p.'
-        return referencia
+        return '%(autores)s %(titulo)s. %(local)s: %(instituicao)s, %(ano)s. ' \
+                '%(paginas)s p.' % {
+            'autores': self._monta_nome(relatorio_tecnico_cientifico.autores),
+            'titulo': relatorio_tecnico_cientifico.titulo,
+            'local': relatorio_tecnico_cientifico.local_publicacao,
+            'instituicao': relatorio_tecnico_cientifico.instituicao,
+            'ano': relatorio_tecnico_cientifico.ano_publicacao,
+            'paginas': relatorio_tecnico_cientifico.numero_paginas }
 
     def gera_referencia(self, documento):
         if documento.tipo == 'trabalho de conclusão':
@@ -113,4 +107,12 @@ class ReferenciaBibliografica:
             return self._referencia_livro(documento)
         elif documento.tipo == 'relatorio tecnico cientifico':
             return self._referencia_relatorio_tecnico_cientifico(documento)
+
+    def _gerar_subtitulo(self, documento):
+        return self._gerar_opcional(documento.subtitulo, ': %s')
+
+    def _gerar_opcional(self, texto, string):
+        if texto is None:
+            return ''
+        return string % texto
 
