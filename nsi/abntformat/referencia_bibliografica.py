@@ -91,7 +91,7 @@ class ReferenciaBibliografica:
         referencia += livro.numero_paginas + ' p.'
         return referencia
 
-    def _referencia_ralatorio_tecnico_cientifico(self, relatorio_tecnico_cientifico):
+    def _referencia_relatorio_tecnico_cientifico(self, relatorio_tecnico_cientifico):
         referencia = self._monta_nome(relatorio_tecnico_cientifico.autores)
         referencia += ' ' + relatorio_tecnico_cientifico.titulo + '. '
         referencia += relatorio_tecnico_cientifico.local_publicacao + ': '
@@ -112,5 +112,5 @@ class ReferenciaBibliografica:
         elif documento.tipo == 'livro':
             return self._referencia_livro(documento)
         elif documento.tipo == 'relatorio tecnico cientifico':
-            return self._referencia_ralatorio_tecnico_cientifico(documento)
+            return self._referencia_relatorio_tecnico_cientifico(documento)
 
