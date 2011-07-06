@@ -95,18 +95,15 @@ class ReferenciaBibliografica:
             'paginas': relatorio_tecnico_cientifico.numero_paginas }
 
     def gera_referencia(self, documento):
-        if documento.tipo == 'trabalho de conclusão':
-            return self._referencia_trabalho_conclusao(documento)
-        elif documento.tipo == 'artigo de anais de eventos':
-            return self._referencia_artigo_anais_evento(documento)
-        elif documento.tipo == 'artigo de periodico':
-            return self._referencia_artigo_periodico(documento)
-        elif documento.tipo == 'periodico tecnico cientifico':
-            return self._referencia_periodico_tecnico_cientifico(documento)
-        elif documento.tipo == 'livro':
-            return self._referencia_livro(documento)
-        elif documento.tipo == 'relatorio tecnico cientifico':
-            return self._referencia_relatorio_tecnico_cientifico(documento)
+        conversores = {
+            'trabalho de conclusão': self._referencia_trabalho_conclusao,
+            'artigo de anais de eventos': self._referencia_artigo_anais_evento,
+            'artigo de periodico': self._referencia_artigo_periodico,
+            'periodico tecnico cientifico': self._referencia_periodico_tecnico_cientifico,
+            'livro':self._referencia_livro,
+            'relatorio tecnico cientifico': self._referencia_relatorio_tecnico_cientifico }
+        converter = conversores[documento.tipo]
+        return converter(documento)
 
     def _gerar_subtitulo(self, documento):
         return self._gerar_opcional(documento.subtitulo, ': %s')
