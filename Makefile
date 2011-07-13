@@ -15,5 +15,5 @@ test: test_deps
 	@echo ==============================================
 	@echo ============ Running unit specs ==============
 	@specloud
-	@echo
+	@python -c "import doctest; doctest.testfile('README.rst')"
 
