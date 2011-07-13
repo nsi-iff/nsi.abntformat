@@ -44,3 +44,7 @@ No exemplo abaixo, é gerada uma referência bibliográfica para trabalho de con
     >>> referencia.gerar(documento)
     'TORVALDS, L. Git: Destruindo o Passado de Trevas. 2008. 120 f. Tese (Doutorado em Computacao) - Instituto Federal Fluminense, Campos dos Goytacazes/RJ.'
 
+Copyright
+---------
+
+Copyright (c) 2011 Núcleo de Pesquisa em Sistemas de Informação. Veja LICENSE.txt para mais informações.
