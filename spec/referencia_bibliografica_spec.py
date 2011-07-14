@@ -130,6 +130,40 @@ class ReferenciaBibliograficaSpec(unittest.TestCase):
             'custo de mão-de-obra na construção civil. São Paulo: EPUSP, 1991. '
             '38 p.')
 
+    def test_gera_referencia_de_imagem(self):
+        referencia = ReferenciaBibliografica()
+        with Stub() as imagem:
+            imagem.tipo >> 'imagem'
+            imagem.autores >> 'Alberto Gomes Pereira; Ricardo Silva'
+            imagem.titulo >> 'As crianças da indonésia'
+            imagem.instituicao >> 'Instituto Federal Fluminense'
+            imagem.local >> 'Campos dos Goytacazes'
+        referencia_abnt = referencia.gerar(imagem)
+        referencia_abnt |should| equal_to('PEREIRA, A. G.; SILVA, R. As '
+        'crianças da indonésia. Instituto Federal Fluminense, Campos dos '
+        'Goytacazes.')
+
+    def test_gera_referencia_de_objetos_de_aprendizagem(self):
+        referencia = ReferenciaBibliografica()
+        with Stub() as objetos_de_aprendizagem:
+            objetos_de_aprendizagem.tipo >> 'objetos de aprendizagem'
+            objetos_de_aprendizagem.autores >> 'Ariosvaldo Gomes'
+            objetos_de_aprendizagem.titulo >> 'Viver é aprender'
+            objetos_de_aprendizagem.instituicao >> 'Instituto Federal Fluminense'
+        referencia_abnt = referencia.gerar(objetos_de_aprendizagem)
+        referencia_abnt |should| equal_to('GOMES, A. Viver é aprender. '
+        'Instituto Federal Fluminense.')
+
+    def test_gera_referencia_de_outros_conteudos(self):
+        referencia = ReferenciaBibliografica()
+        with Stub() as outros_conteudos:
+            outros_conteudos.tipo >> 'outros conteúdos'
+            outros_conteudos.autores >> 'Adalberto Pereira Silva'
+            outros_conteudos.titulo >> 'Tenho joanetes'
+            outros_conteudos.instituicao >> 'Instituto Federal Fluminense'
+        referencia_abnt = referencia.gerar(outros_conteudos)
+        referencia_abnt |should| equal_to('SILVA, A. P. Tenho joanetes. '
+        'Instituto Federal Fluminense.')
 
 if __name__ == '__main__':
     unittest.main()

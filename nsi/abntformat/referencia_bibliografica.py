@@ -92,6 +92,25 @@ class ReferenciaBibliografica:
             'ano': relatorio_tecnico_cientifico.ano_publicacao,
             'paginas': relatorio_tecnico_cientifico.numero_paginas }
 
+    def _referencia_imagem(self, imagem):
+        return '%(autores)s %(titulo)s. %(instituicao)s, %(local)s.' % {
+            'autores': self._monta_nome(imagem.autores),
+            'titulo': imagem.titulo,
+            'instituicao': imagem.instituicao,
+            'local': imagem.local }
+
+    def _referencia_objetos_de_aprendizagem(self, objetos_de_aprendizagem):
+        return '%(autores)s %(titulo)s. %(instituicao)s.' % {
+            'autores': self._monta_nome(objetos_de_aprendizagem.autores),
+            'titulo': objetos_de_aprendizagem.titulo,
+            'instituicao': objetos_de_aprendizagem.instituicao }
+
+    def _referencia_outros_conteudos(self, outros_conteudos):
+        return '%(autores)s %(titulo)s. %(instituicao)s.' % {
+            'autores': self._monta_nome(outros_conteudos.autores),
+            'titulo': outros_conteudos.titulo,
+            'instituicao': outros_conteudos.instituicao }
+
     def gerar(self, documento):
         conversores = {
             'trabalho de conclusão': self._referencia_trabalho_conclusao,
@@ -99,7 +118,10 @@ class ReferenciaBibliografica:
             'artigo de periodico': self._referencia_artigo_periodico,
             'periodico tecnico cientifico': self._referencia_periodico_tecnico_cientifico,
             'livro':self._referencia_livro,
-            'relatorio tecnico cientifico': self._referencia_relatorio_tecnico_cientifico }
+            'relatorio tecnico cientifico': self._referencia_relatorio_tecnico_cientifico,
+            'imagem': self._referencia_imagem,
+            'objetos de aprendizagem': self._referencia_objetos_de_aprendizagem,
+            'outros conteúdos': self._referencia_outros_conteudos }
         converter = conversores[documento.tipo]
         return converter(documento)
 
